@@ -1,20 +1,21 @@
 <template>
-  <div>
-    <h1>Hello, I'm App.vue..!</h1>
-  </div>
+  <app-header />
+  <router-view />
 </template>
 
 <script>
-  export default {
-    name: 'app',
-    data() {
-      return {
-        msg: 'hi'
-      }
+import appHeader from './components/app-header.vue'
+export default {
+  name: 'app',
+  data() {
+    return {
     }
+  },
+  components: {
+    appHeader
   }
+}
 </script>
 
-<style scoped>
-
+<style>
 </style>
