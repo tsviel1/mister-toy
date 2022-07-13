@@ -31,16 +31,16 @@
 
 @font-face {
   font-family: 'Roboto-Regular';
-  src: local('Roboto-Regular'), url(~@/assets/styles/fonts/Roboto/Roboto-Regular.ttf);
+  src: local('Roboto-Regular'), url('@/assets/styles/fonts/Roboto/Roboto-Regular.ttf');
 }
 //~@/assets/styles/fonts/Roboto/Roboto-Regular.ttf
 @font-face {
   font-family: 'Roboto-Bold';
-  src: local('Roboto-Bold'), url(~@/assets/styles/fonts/Roboto/Roboto-Bold.ttf);
+  src: local('Roboto-Bold'), url('@/assets/styles/fonts/Roboto/Roboto-Bold.ttf');
 }
 
 @font-face {
   font-family: 'Roboto-Medium';
-  src: local('Roboto-Medium'), url(~@/assets/styles/fonts/Roboto/Roboto-Medium.ttf);
+  src: local('Roboto-Medium'), url('@/assets/styles/fonts/Roboto/Roboto-Medium.ttf');
 }
 //  src: url('../fonts/Roboto/Roboto-Medium.ttf');
