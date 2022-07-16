@@ -7,12 +7,8 @@ export default {
     },
     getters: {
         toysToDisplay(state) {
-            var toys = state.toys
-            console.log('state.currFilterBy', state.currFilterBy)
-            
-
+            var toys = state.toys            
             if (state.currFilterBy?.status === 'in-stock') {
-                console.log('hello');
                 toys = toys.filter(toy => toy.inStock)
             } else if (state.currFilterBy?.status === 'out-of-stock') {
                 toys = toys.filter(toy => (!toy.inStock))
@@ -26,6 +22,22 @@ export default {
         currFilterBy(state) {
             return state.currFilterBy
         },
+        currInStock(state) {
+            const numberOfInStock = state.toys.filter(toy => toy.inStock)
+            return numberOfInStock.length
+        },
+        currOutOfStock(state) {
+            const numberOutOfStock = state.toys.filter(toy => !toy.inStock)
+            return numberOutOfStock.length
+        },
+        currNotExpensive(state) {
+            const notExpensive = state.toys.filter(toy => +toy.price >= 60)
+            return notExpensive.length
+        },
+        currExpensive(state) {
+            const expensive = state.toys.filter(toy => +toy.price < 60)
+            return expensive.length
+        },
     },
     mutations: {
         setToys(state, { toys }) {
@@ -36,7 +48,6 @@ export default {
             state.toys.splice(idx, 1)
         },
         saveToy(state, { savedToy }) {
-            console.log('savedToy', savedToy)
             const idx = state.toys.findIndex((currToy) => currToy._id === savedToy._id)
             if (idx !== -1) state.toys.splice(idx, 1, savedToy)
             else state.toys.unshift(savedToy)

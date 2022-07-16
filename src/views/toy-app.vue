@@ -18,9 +18,6 @@ export default {
 
         }
     },
-    created() {
-        this.$store.dispatch({ type: 'loadToys' })
-    },
     methods: {
         removeToy(toyId) { 
             this.$store.dispatch({ type: 'removeToy', id: toyId })

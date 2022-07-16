@@ -4,6 +4,7 @@ import toyApp from '../views/toy-app.vue'
 import aboutPage from '../views/about.vue'
 import toyDetails from '../views/toy-details.vue'
 import toyEdit from '../views/toy-edit.vue'
+import toyChart from '../views/toy-chart.vue'
 
 
 const router = createRouter({
@@ -33,6 +34,11 @@ const router = createRouter({
       path: '/toy/edit/:id?',
       name: 'toy-edit',
       component: toyEdit,
+    },
+    {
+      path: '/chart',
+      name: 'toy-chart',
+      component: toyChart,
     },
   ]
 })
