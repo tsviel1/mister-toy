@@ -19,7 +19,7 @@ export default {
         }
     },
     methods: {
-        removeToy(toyId) { 
+        removeToy(toyId) {
             this.$store.dispatch({ type: 'removeToy', id: toyId })
         },
         setFilterBy(filterBy) {
@@ -43,7 +43,10 @@ export default {
     components: {
         toyList,
         toyFilter
-    }
+    },
+    created() {
+        this.$store.dispatch({ type: 'loadToys' })
+    },
 }
 
 </script>

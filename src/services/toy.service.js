@@ -20,16 +20,16 @@ function query() {
 
 function save(toy) {
     if (toy._id) {
-        return axios.put(BASE_URL + toy._id, toy)
+        return axios.put(BASE_URL + toy._id, toy, {withCredentials: true})
             .then((res) => res.data)
     } else {
-        return axios.post(BASE_URL, toy)
+        return axios.post(BASE_URL, toy, {withCredentials: true})
             .then((res) => res.data)
     }
 }
 
 function remove(toyId) {
-    return axios.delete(BASE_URL + toyId)
+    return axios.delete(BASE_URL + toyId, {withCredentials: true})
         .then((res) => res.data)
 }
 

@@ -53,30 +53,34 @@ export default {
       return this.labels.filter(labels => labels.selected).map(label => label.name)
     }
   },
-  created() {
+  async created() {
     const { id } = this.$route.params
     if (id) {
-      toyService.getById(id).then((toy) => {
+      try {
+        const toy = await toyService.getById(id)
         this.toyToEdit = toy
-      })
+      } catch(err) {
+        console.log('problem fetching toy', err);
+      }
     } else this.toyToEdit = toyService.getEmptyToy()
   },
   methods: {
     goBack() {
       this.$router.push('/toy')
     },
-    saveToy() {
+    async saveToy() {
       this.toyToEdit.labels = this.selectedLabels
-      console.log('this.toyToEdit', this.toyToEdit)
-      
-      this.$store.dispatch({ type: 'saveToy', toy: {...this.toyToEdit} })
-        .then((reply) => {
-          this.$router.push('/toy')
-        })
-    },
-    changeLabel(e) {
-      this.toyToEdit.labels.push(e.target.value)
-    }
+      try {
+        await this.$store.dispatch({ type: 'saveToy', toy: { ...this.toyToEdit } })
+        console.log('hello from toy-edit');
+        this.$router.push('/toy')
+      } catch(err) {
+        console.log('cannot save toy', err);
+      }
   },
+  changeLabel(e) {
+    this.toyToEdit.labels.push(e.target.value)
+  }
+},
 }
 </script>

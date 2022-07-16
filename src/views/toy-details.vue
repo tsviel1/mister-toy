@@ -7,7 +7,7 @@
             <p><span class="fw-bold">Created At:</span> {{ toy.createdAt }}</p>
             <p><span class="fw-bold">In stock:</span> {{ toy.inStock }}</p>
             <p v-if="toy.labels.length > 0"><span class="fw-bold">Labels:</span> {{ toy.labels }}</p>
-            <p v-if="toy.reviews.length > 0"><span class="fw-bold">Reviews:</span> {{ toy.reviews }}</p>
+            <p v-if="toy.reviews?.length > 0"><span class="fw-bold">Reviews:</span> {{ toy.reviews }}</p>
         </article>
         <button @click="goBack" class="btn btn-primary">go back</button>
     </section>
@@ -21,12 +21,14 @@ export default {
             toy: null
         }
     },
-    created() {
+    async created() {
         const { toyId } = this.$route.params
-        toyService.getById(toyId)
-            .then((toy) => {
-                this.toy = toy
-            })
+        try {
+            const toy = await toyService.getById(toyId)
+            this.toy = toy
+        } catch(err) {
+            console.log('couldnt get toy details', err);
+        }
     },
     methods: {
         goBack() {

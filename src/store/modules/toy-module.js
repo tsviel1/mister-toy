@@ -7,7 +7,7 @@ export default {
     },
     getters: {
         toysToDisplay(state) {
-            var toys = state.toys            
+            var toys = state.toys
             if (state.currFilterBy?.status === 'in-stock') {
                 toys = toys.filter(toy => toy.inStock)
             } else if (state.currFilterBy?.status === 'out-of-stock') {
@@ -50,30 +50,37 @@ export default {
         saveToy(state, { savedToy }) {
             const idx = state.toys.findIndex((currToy) => currToy._id === savedToy._id)
             if (idx !== -1) state.toys.splice(idx, 1, savedToy)
-            else state.toys.unshift(savedToy)
+            else state.toys.push(savedToy)
         },
         setFilter(state, { filterBy }) {
             state.currFilterBy = filterBy
         }
     },
     actions: {
-        loadToys({ commit }) {
-            toyService.query()
-                .then((toys) => {
-                    commit({ type: 'setToys', toys })
-                })
+        loadToys: async ({ commit }) => {
+            try {
+                const toys = await toyService.query()
+                commit({ type: 'setToys', toys })
+            } catch (err) {
+                console.log(err)
+            }
         },
-        removeToy({ commit }, { id }) {
-            return toyService.remove(id)
-                .then(() => {
-                    commit({ type: 'removeToy', id })
-                })
+        removeToy: async ({ commit }, { id }) => {
+            try {
+                await toyService.remove(id)
+                commit({ type: 'removeToy', id })
+            } catch (err) {
+                console.log(err)
+            }
         },
-        saveToy({ commit }, { toy }) {
-            return toyService.save(toy)
-                .then((savedToy) => {
-                    commit({ type: 'saveToy', savedToy })
-                })
+        saveToy: async ({ commit }, { toy }) => {
+            try {
+                const savedToy = await toyService.save(toy)
+                console.log('savedToy from actions:', savedToy)
+                commit({type: 'saveToy', savedToy})
+            } catch (err) {
+                console.log(err)
+            }
         }
     },
 };
