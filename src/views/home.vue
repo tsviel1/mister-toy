@@ -43,7 +43,7 @@ export default {
     methods: {
         async onLogin() {
             try {
-                const user = await this.$store.dispatch({ type: 'login', credentials: this.credentials })
+                const user = await this.$store.dispatch({ type: 'login', userCred: this.credentials })
                 this.user = user
             } catch(err) {
                 console.log('cannot login', err);
@@ -51,7 +51,7 @@ export default {
         },
         async signup() {
             try {
-                const user = await this.$store.dispatch({ type: 'signup', signupInfo: this.signupInfo })
+                const user = await this.$store.dispatch({ type: 'signup', userCred: this.signupInfo })
                 this.user = user
             } catch(err) {
                 console.log(err);

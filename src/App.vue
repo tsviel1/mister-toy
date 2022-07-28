@@ -14,7 +14,9 @@ export default {
   components: {
     appHeader
   },
-
+  created() {
+    this.$store.dispatch({ type: 'loadToys' })
+  },
 }
 </script>
 

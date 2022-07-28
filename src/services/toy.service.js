@@ -1,4 +1,8 @@
-import axios from 'axios'
+import { httpService } from './http.service'
+import { utilService } from './util.service'
+// const reviewService = require('../review/review.service')
+
+const ENDPOINT = 'toy'
 
 export const toyService = {
     query,
@@ -8,40 +12,31 @@ export const toyService = {
     getEmptyToy
 }
 
-const BASE_URL = (process.env.NODE_ENV !== 'development')
-               ? '/api/toy/'
-               : '//localhost:3030/api/toy/';
-
 // TODO: support paging and filtering and sorting
-function query() {
-    return axios.get(BASE_URL)
-        .then((res) => res.data)
+async function query(filterBy = {}) {
+    return await httpService.get(ENDPOINT, filterBy)
+
 }
 
-function save(toy) {
-    if (toy._id) {
-        return axios.put(BASE_URL + toy._id, toy, {withCredentials: true})
-            .then((res) => res.data)
-    } else {
-        return axios.post(BASE_URL, toy, {withCredentials: true})
-            .then((res) => res.data)
-    }
+async function save(toy) {
+    return toy._id
+    ? await httpService.put(`${ENDPOINT}/${toy._id}`, toy)
+    : await httpService.post(ENDPOINT, toy)
+    
 }
 
-function remove(toyId) {
-    return axios.delete(BASE_URL + toyId, {withCredentials: true})
-        .then((res) => res.data)
+async function remove(toyId) {
+    return await httpService.delete(`${ENDPOINT}/${toyId}`)
 }
 
-function getById(toyId) {
-    return axios.get(BASE_URL + toyId)
-        .then((res) => res.data)
+async function getById(toyId) {
+    return await httpService.get(`${ENDPOINT}/${toyId}`)
 }
 
 function getEmptyToy() {
     return {
         name: '',
-        price: 100,
+        price: utilService.getRandomInt(10, 60),
         labels: [],
         createdAt: Date.now(),
         inStock: true

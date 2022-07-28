@@ -1,7 +1,7 @@
 import { createStore } from 'vuex'
 import toyStore from './modules/toy-module.js'
 import userStore from './modules/user-module.js'
-import authStore from './modules/auth-module.js'
+import reviewStore from './modules/review-module.js'
 
 
 const store = createStore({
@@ -17,7 +17,7 @@ const store = createStore({
   modules: {
     toyStore,
     userStore,
-    authStore
+    reviewStore
   }
 })
 

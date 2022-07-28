@@ -3,7 +3,8 @@ import { toyService } from '../../services/toy.service'
 export default {
     state: {
         toys: [],
-        currFilterBy: null
+        currFilterBy: null,
+        watchedToy: null
     },
     getters: {
         toysToDisplay(state) {
@@ -38,6 +39,8 @@ export default {
             const expensive = state.toys.filter(toy => +toy.price < 60)
             return expensive.length
         },
+        watchedToy({ watchedToy }) { return watchedToy }
+
     },
     mutations: {
         setToys(state, { toys }) {
@@ -54,12 +57,16 @@ export default {
         },
         setFilter(state, { filterBy }) {
             state.currFilterBy = filterBy
-        }
+        },
+        setWatchedToy(state, { toy }) {
+            state.watchedToy = toy
+        },    
     },
     actions: {
         loadToys: async ({ commit }) => {
             try {
                 const toys = await toyService.query()
+                
                 commit({ type: 'setToys', toys })
             } catch (err) {
                 console.log(err)
@@ -76,11 +83,10 @@ export default {
         saveToy: async ({ commit }, { toy }) => {
             try {
                 const savedToy = await toyService.save(toy)
-                console.log('savedToy from actions:', savedToy)
                 commit({type: 'saveToy', savedToy})
             } catch (err) {
                 console.log(err)
             }
-        }
+        },
     },
 };

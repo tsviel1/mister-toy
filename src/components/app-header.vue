@@ -8,6 +8,7 @@
             <router-link class="link" to="/">Home</router-link>
             <router-link class="link" to="/toy">Toys</router-link>
             <router-link class="link" to="/about">About</router-link>
+            <router-link class="link" to="/user">User</router-link>
         </nav>
 
     </header>

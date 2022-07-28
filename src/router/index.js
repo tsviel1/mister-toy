@@ -5,6 +5,8 @@ import aboutPage from '../views/about.vue'
 import toyDetails from '../views/toy-details.vue'
 import toyEdit from '../views/toy-edit.vue'
 import toyChart from '../views/toy-chart.vue'
+import userDetails from '../views/user-details.vue'
+
 
 
 const router = createRouter({
@@ -39,6 +41,11 @@ const router = createRouter({
       path: '/chart',
       name: 'toy-chart',
       component: toyChart,
+    },
+    {
+      path: '/user',
+      name: 'user',
+      component: userDetails,
     },
   ]
 })

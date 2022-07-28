@@ -72,7 +72,6 @@ export default {
       this.toyToEdit.labels = this.selectedLabels
       try {
         await this.$store.dispatch({ type: 'saveToy', toy: { ...this.toyToEdit } })
-        console.log('hello from toy-edit');
         this.$router.push('/toy')
       } catch(err) {
         console.log('cannot save toy', err);
