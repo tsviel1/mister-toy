@@ -24,7 +24,7 @@
         </form>
         <div v-if="reviews?.length" class="my-1 flex flex-col gap-1">
             <article class="review flex flex-col gap-1 items-start p-3" v-for="review in reviews" :key="review._id">
-                <p class="fw-600">{{ review.content }}</p>
+                <p class="fw-600">Review: {{ review.content }}</p>
                 <p>Rate: {{ review.rate }}⭐</p>
                 <p>By: {{ review.user?.username }}</p>
                 <button v-if="user?.isAdmin" class="btn btn-danger" @click="removeReview(review._id)">
@@ -48,12 +48,8 @@ export default {
         }
     },
     async created() {
-        const { toyId } = this.$route.params
-        console.log('id', toyId)
-        
+        const { toyId } = this.$route.params  
         this.toy = await toyService.getById(toyId)
-        console.log('this.toy', this.toy)
-        
         const user = this.$store.getters.user
         
 
@@ -74,12 +70,18 @@ export default {
             try {
                 if (!this.reviewToAdd.content) return
                 await this.$store.dispatch({ type: 'addReview', review: this.reviewToAdd })
-                console.log('this.reviewToAdd', this.reviewToAdd)
-                
                 showSuccessMsg('Review added')
                 this.reviewToEdit = { txt: '', aboutUserId: null }
             } catch (err) {
                 showErrorMsg('Cannot add review')
+            }
+        },
+        async removeReview(reviewId) {
+            try {
+                await this.$store.dispatch({type: 'removeReview', reviewId})
+                showSuccessMsg('Review removed')
+            } catch(err) {
+                showErrorMsg('Cannot remove review')
             }
         }
     },

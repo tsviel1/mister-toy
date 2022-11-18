@@ -1,6 +1,6 @@
 <template lang="">
     <section class="toy-app container flex flex-col gap-1">
-        <button @click="goToEdit">Add a new toy</button>
+        <button class="btn toy" @click="goToEdit">Add a new toy</button>
         <toy-filter @setFilterBy="setFilterBy" :currFilterBy="getFilterBy"/>
         <h1>Your Toys:</h1>
         <toy-list :toys="toysToDisplay" @removeToy="removeToy" />
@@ -13,11 +13,6 @@ import toyFilter from '../components/toy-filter.vue'
 
 export default {
     name: 'toy-app',
-    data() {
-        return {
-
-        }
-    },
     methods: {
         removeToy(toyId) {
             this.$store.dispatch({ type: 'removeToy', id: toyId })

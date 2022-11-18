@@ -1,26 +1,30 @@
 <template>
-    <div>
-        <h2>home sweet home</h2>
-    </div>
-    <section v-if="user" class="user-info">
-        <pre>
-                {{ user }}
-            </pre>
-        <button @click="logout">Logout</button>
+    <section class="container">
+        <div>
+            <h2>home sweet home</h2>
+        </div>
+        <section v-if="user" class="user-info">
+            <h3>
+                Welcome, {{ user.username }}
+            </h3>
+            <button class="btn btn-secondary" @click="logout">Logout</button>
+        </section>
+        <section v-else>
+            <form @submit.prevent="onLogin">
+                <input type="text" v-model="credentials.username" placeholder="username">
+                <input type="password" v-model="credentials.password" placeholder="password">
+                <button>Login</button>
+            </form>
+            <hr />
+            <form @submit.prevent="signup">
+                <h2>Signup</h2>
+                <input type="text" v-model="signupInfo.fullname" placeholder="Full name" />
+                <input type="text" v-model="signupInfo.username" placeholder="Username" />
+                <input type="password" v-model="signupInfo.password" placeholder="Password" />
+                <button>Signup</button>
+            </form>
+        </section>
     </section>
-    <form v-else @submit.prevent="onLogin">
-        <input type="text" v-model="credentials.username" placeholder="username">
-        <input type="password" v-model="credentials.password" placeholder="password">
-        <button>Login</button>
-    </form>
-    <hr />
-    <form @submit.prevent="signup">
-        <h2>Signup</h2>
-        <input type="text" v-model="signupInfo.fullname" placeholder="Full name" />
-        <input type="text" v-model="signupInfo.username" placeholder="Username" />
-        <input type="password" v-model="signupInfo.password" placeholder="Password" />
-        <button>Signup</button>
-    </form>
 </template>
 
 <script>
@@ -45,7 +49,7 @@ export default {
             try {
                 const user = await this.$store.dispatch({ type: 'login', userCred: this.credentials })
                 this.user = user
-            } catch(err) {
+            } catch (err) {
                 console.log('cannot login', err);
             }
         },
@@ -53,7 +57,7 @@ export default {
             try {
                 const user = await this.$store.dispatch({ type: 'signup', userCred: this.signupInfo })
                 this.user = user
-            } catch(err) {
+            } catch (err) {
                 console.log(err);
             }
         },
@@ -61,16 +65,13 @@ export default {
             try {
                 await this.$store.dispatch({ type: 'logout' })
                 this.user = null
-            } catch(err) {
+            } catch (err) {
                 console.log('cannot logout', err);
             }
         }
     },
     created() {
-        this.user = this.$store.getters.loggedinUser
+        this.user = this.$store.getters.user
     }
 }
 </script>
-
-<style>
-</style>
