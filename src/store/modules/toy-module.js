@@ -32,11 +32,11 @@ export default {
             return numberOutOfStock.length
         },
         currNotExpensive(state) {
-            const notExpensive = state.toys.filter(toy => +toy.price >= 60)
+            const notExpensive = state.toys.filter(toy => +toy.price < 60)
             return notExpensive.length
         },
         currExpensive(state) {
-            const expensive = state.toys.filter(toy => +toy.price < 60)
+            const expensive = state.toys.filter(toy => +toy.price >= 60)
             return expensive.length
         },
         watchedToy({ watchedToy }) { return watchedToy }

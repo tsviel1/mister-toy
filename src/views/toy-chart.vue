@@ -20,16 +20,16 @@ export default {
                 datasets: [
                     {
                         data: [this.$store.getters.currInStock, this.$store.getters.currOutOfStock],
-                        backgroundColor: ['#77CEFF', '#0079AF'],
+                        backgroundColor: ['#60c730', '#e84f38'],
                     },
                 ],
             },
             pricesData: {
-                labels: ['less than $59.99', 'more than $60'],
+                labels: ['less than $60', '$60 or more'],
                 datasets: [
                     {
                         data: [this.$store.getters.currNotExpensive, this.$store.getters.currExpensive],
-                        backgroundColor: ['#77CEFF', '#0079AF'],
+                        backgroundColor: ['#e8c838', '#f54c2f'],
                     },
                 ],
             },
