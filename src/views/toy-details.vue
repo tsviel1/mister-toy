@@ -33,7 +33,7 @@
             </article>
         </div>
         <div class="chat-about-toy">
-            <h3>chat</h3>
+            <h3>Chat about {{toy.name}}</h3>
             <div class="chat-container">
                 <ul id="messages">
                     <li class="message" v-for="(msg, idx) in msgs" :key="idx">
