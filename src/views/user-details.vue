@@ -7,7 +7,7 @@
     <h3 v-if="userReviews?.length === 0">No reviews yet</h3>
     <article class="review p-2" v-for="review in userReviews" :key="review._id">
       <h1>
-        by <span class="clr-teal">{{ review.user.username }}</span> about
+        About
         <span class="clr-teal">{{ review.toy.name }}</span>
       </h1>
       <p>{{ review.content }}</p>

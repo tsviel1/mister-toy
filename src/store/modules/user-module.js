@@ -15,6 +15,9 @@ export default {
         },
         watchedUser({watchedUser}) {
             return watchedUser
+        },
+        getIsUserAdmin({loggedinUser}) {
+            return loggedinUser?.isAdmin
         }
     },
     mutations: {

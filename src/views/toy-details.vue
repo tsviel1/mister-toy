@@ -21,6 +21,9 @@
             </div>
             <button class="btn btn-info">Add Review</button>
         </form>
+        <div v-else-if="!user">
+            Please <router-link to="/">login/signup</router-link> to add a review
+        </div>
         <div v-if="reviews?.length" class="my-1 flex flex-col gap-1">
             <h3>Reviews by users:</h3>
             <article class="review flex flex-col gap-1 items-start p-3" v-for="review in reviews" :key="review._id">

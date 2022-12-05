@@ -1,6 +1,6 @@
 <template lang="">
     <section class="toy-app container flex flex-col gap-1">
-        <button class="btn toy" @click="goToEdit">Add a new toy</button>
+        <button v-if="userIsAdmin" class="btn toy" @click="goToEdit">Add a new toy</button>
         <toy-filter @setFilterBy="setFilterBy" :currFilterBy="getFilterBy"/>
         <h1>Your Toys:</h1>
         <toy-list :toys="toysToDisplay" @removeToy="removeToy" />
@@ -34,6 +34,9 @@ export default {
         getFilterBy() {
             return this.$store.getters.currFilterBy
         },
+        userIsAdmin() {
+            return this.$store.getters.getIsUserAdmin
+        }
     },
     components: {
         toyList,

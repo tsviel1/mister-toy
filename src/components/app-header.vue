@@ -2,7 +2,9 @@
     <section class="main-header">
         <header class="flex items-center justify-between container full">
             <div class="logo uppercase">
-                <h2>Toys</h2>
+                <h2>
+                    <router-link class="link" to="/toy">Toys</router-link>
+                </h2>
             </div>
             <nav class="flex gap-1">
                 <router-link class="link" to="/chart">Charts</router-link>
